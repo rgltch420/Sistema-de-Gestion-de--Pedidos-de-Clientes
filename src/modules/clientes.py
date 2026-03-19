@@ -1,6 +1,4 @@
-import os
 import re
-
 client = {}
 
 def is_valid_email(email):
@@ -23,10 +21,19 @@ def createClients():
         
     while tries_user_converted > tries :
         tries += 1 
-        id_client +=1 
+        try:
+            id_clients = input("Ingrese el ID del cliente: ").strip()
+        except ValueError:
+            print("Por favor ingresa un numero positivo mayor a 0")    
         name_client = input("Ingresa el nombre del cliente: ").strip()
         email_client = input("Ingresa el email del cliente: ").strip()
-        if not (name_client):
+        id_client= int(id_clients)
+        if id_client < 1: 
+            print("Ingresa unicamente numeros positivos mayores a 1")
+            tries -= 1
+            id_client -= 1
+            continue
+        if not (name_client and id_client):
             print("No dejar campos vacios o espacios vacios")
             tries -= 1
             id_client -= 1
