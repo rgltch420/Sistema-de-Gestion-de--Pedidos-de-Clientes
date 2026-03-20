@@ -1,5 +1,8 @@
 products = {}
 
+def get_product(product_id):
+    return products.get(product_id)
+
 def create_products(products_dict):
     count = 0
 
