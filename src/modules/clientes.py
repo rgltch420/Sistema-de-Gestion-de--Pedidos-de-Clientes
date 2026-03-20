@@ -1,60 +1,62 @@
 import re
+
 client = {}
 
 def is_valid_email(email):
     pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
-    return re.match(pattern, email)
+    return bool(re.match(pattern, email))
 
-def createClients():
-    tries = 0
-    id_client = 0
-    while(True):
+
+def create_clients():
+
+    while True:
         try:
-            tries_users = input("Cuantos usarios deseas ingresar: ").strip()
-            tries_user_converted = int(tries_users)
-            if tries_user_converted < 1:
-                print("debe ser al menos 1")
+            total_users = int(input("How many users do you want to register?: ").strip())
+            if total_users < 1:
+                print("You must register at least 1 user")
                 continue
             break
-        except (ValueError,UnboundLocalError):
-            print("Ingresa unicamente numeros positivos mayor a cero")   
-        
-    while tries_user_converted > tries :
-        tries += 1 
-        try:
-            id_clients = input("Ingrese el ID del cliente: ").strip()
         except ValueError:
-            print("Por favor ingresa un numero positivo mayor a 0")    
-        name_client = input("Ingresa el nombre del cliente: ").strip()
-        email_client = input("Ingresa el email del cliente: ").strip()
-        id_client= int(id_clients)
-        if id_client < 1: 
-            print("Ingresa unicamente numeros positivos mayores a 1")
-            tries -= 1
-            id_client -= 1
+            print("Enter only valid numbers")
+
+    count = 0
+
+    while count < total_users:
+
+        try:
+            id_client = int(input("Enter client ID: ").strip())
+            if id_client < 1:
+                print("ID must be greater than 0")
+                continue
+
+        except ValueError:
+            print("Invalid ID")
             continue
-        if not (name_client and id_client):
-            print("No dejar campos vacios o espacios vacios")
-            tries -= 1
-            id_client -= 1
+
+        if id_client in client:
+            print("This ID already exists")
             continue
+
+        name_client = input("Enter client name: ").strip()
+        if not name_client:
+            print("Name cannot be empty")
+            continue
+
+        email_client = input("Enter client email: ").strip()
         if not is_valid_email(email_client):
-            print("Ingresa un email válido (ej: xxxxx@xxxx.com)")
-            tries -= 1
-            id_client -= 1
-            continue     
-        client[id_client]={
-        "Name": name_client,
-        "Email": email_client
-    }
-        print(f"Cliente {client[id_client]['Name']} fue creado exitosamente con su mail {client[id_client]['Email']}")
-        
-        return id_client
-        
-       
-    else:
-        print("Ingresaste correctamente todos los usuarios")
-        
-           
-  
-createClients()  
+            print("Enter a valid email (e.g: example@mail.com)")
+            continue
+
+        client[id_client] = {
+            "Name": name_client,
+            "Email": email_client
+        }
+
+        print(f"Client {name_client} was successfully created with email {email_client}")
+        count += 1
+
+    return client
+
+
+def get_client(id_client):
+    return client.get(id_client)
