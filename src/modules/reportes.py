@@ -1,47 +1,48 @@
-def obtener_total_pedidos(pedidos):
-    return len(pedidos)
+def get_total_orders(orders):
+    return len(orders)
 
 
-def calcular_total_ingresos(pedidos):
+def calculate_total_income(orders):
     total = 0
-    for pedido in pedidos.values():
-        total += pedido["total"]
+    for order in orders.values():
+        total += order["total"]
     return total
 
 
-def agrupar_por_cliente(pedidos):
-    agrupado = {}
+def group_by_client(orders):
+    grouped = {}
 
-    for id_pedido, pedido in pedidos.items():
-        cliente = pedido["client"]
+    for order_id, order in orders.items():
+        client = order["client"]
 
-        if cliente not in agrupado:
-            agrupado[cliente] = {}
+        if client not in grouped:
+            grouped[client] = {}
 
-        agrupado[cliente][id_pedido] = pedido
+        grouped[client][order_id] = order
 
-    return agrupado
+    return grouped
 
 
-def productos_vendidos(pedidos):
-    conteo = {}
+def sold_products(orders):
+    count = {}
 
-    for pedido in pedidos.values():
-        producto = pedido["product"]
+    for order in orders.values():
+        product = order["product"]
 
-        if producto not in conteo:
-            conteo[producto] = 0
+        if product not in count:
+            count[product] = 0
 
-        conteo[producto] += pedido["quantity"]
+        count[product] += order["quantity"]
 
-    return conteo
+    return count
 
-def generar_reporte(pedidos):
-    reporte = {
-        "total_pedidos": obtener_total_pedidos(pedidos),
-        "total_ingresos": calcular_total_ingresos(pedidos),
-        "pedidos_por_cliente": agrupar_por_cliente(pedidos),
-        "productos_vendidos": productos_vendidos(pedidos)
+
+def generate_report(orders):
+    report = {
+        "total_orders": get_total_orders(orders),
+        "total_income": calculate_total_income(orders),
+        "orders_by_client": group_by_client(orders),
+        "sold_products": sold_products(orders)
     }
 
-    return reporte
+    return report

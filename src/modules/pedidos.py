@@ -5,39 +5,39 @@ order_food = {}
 
 def create_order():
     try:
-        id_order = int(input("Ingresa el ID del pedido: ").strip())
-        id_client = int(input("Ingresa el ID del cliente: ").strip())
-        id_product = int(input("Ingresa el ID del producto: ").strip())
-        quantity = int(input("Ingresa la cantidad: ").strip())
+        id_order = int(input("Enter order ID: ").strip())
+        id_client = int(input("Enter client ID: ").strip())
+        id_product = int(input("Enter product ID: ").strip())
+        quantity = int(input("Enter quantity: ").strip())
     except ValueError:
-        print("Datos inválidos")
+        print("Invalid data")
         return None
 
-    # validar cliente
-    cliente = cl.get_client(id_client)
-    if cliente is None:
-        print("Cliente no existe")
+    
+    client = cl.get_client(id_client)
+    if client is None:
+        print("Client does not exist")
         return None
 
-    # validar producto
-    producto = pr.get_product(id_product)
-    if producto is None:
-        print("Producto no existe")
+  
+    product = pr.get_product(id_product)
+    if product is None:
+        print("Product does not exist")
         return None
 
-    # desempaquetar tupla
-    _, product_name, unit_price = producto
+   
+    _, product_name, unit_price = product
 
     total = unit_price * quantity
 
     order_food[id_order] = {
-        "client": cliente["Name"],
+        "client": client["Name"],
         "product": product_name,
         "unit_price": unit_price,
         "quantity": quantity,
         "total": total
     }
 
-    print(f"Pedido creado correctamente")
+    print("Order created successfully")
 
     return order_food[id_order]
