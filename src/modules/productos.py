@@ -1,33 +1,47 @@
-    # Task 4: Consult registered orders
-# Rule: No lists allowed. Using Dictionary and Tuples only.
+products = {}
 
-def get_all_orders(orders_dict):
-    """
-    Shows all orders stored in the dictionary.
-    Returns: A status message (String).
-    """
-    # 1. Validation: Check if the dictionary is empty
-    if len(orders_dict) == 0:
-        return "No orders found"
+def create_products(products_dict):
+    count = 0
 
-    print("--- REGISTERED ORDERS ---")
-    
-    # 2. Loop: Go through each order in the dictionary
-    for order_id in orders_dict:
-        # Get the order info using its ID
-        order_info = orders_dict[order_id]
-        
-        # RULE: product is a TUPLE (id, name, price)
-        # Position 1 is the product name
-        product_tuple = order_info["product"]
-        product_name = product_tuple[1] 
-        
-        customer = order_info["customer"]
-        quantity = order_info["quantity"]
-        total = order_info["total"]
+    while True:
+        try:
+            total = int(input("How many products do you want to register?: ").strip())
+            if total < 1:
+                print("You must register at least 1 product")
+                continue
+            break
+        except ValueError:
+            print("Enter only positive numbers")
 
-        # Display the info in a clear format
-        print(f"Customer: {customer} | Product: {product_name} | Qty: {quantity} | Total: {total}")
+    while count < total:
+        try:
+            product_id = int(input("Enter product ID: ").strip())
+            if product_id < 1:
+                print("ID must be greater than 0")
+                continue
+        except ValueError:
+            print("Invalid ID")
+            continue
 
-    # RULE: All functions must return a value
-    return "Report finished"
+        product_name = input("Enter product name: ").strip()
+
+        try:
+            unit_price = float(input("Enter product price: ").strip())
+            if unit_price <= 0:
+                print("Price must be greater than 0")
+                continue
+        except ValueError:
+            print("Invalid price")
+            continue
+
+        if not product_name:
+            print("Product name cannot be empty")
+            continue
+
+        product_tuple = (product_id, product_name, unit_price)
+        products_dict[product_id] = product_tuple
+
+        print(f"Product '{product_name}' registered successfully")
+        count += 1
+
+    return products_dict
