@@ -19,6 +19,7 @@ def pause():
 
 def menu():
     while True:
+        
         clear()
         
         print("\n===== ORDER MANAGEMENT SYSTEM =====")
