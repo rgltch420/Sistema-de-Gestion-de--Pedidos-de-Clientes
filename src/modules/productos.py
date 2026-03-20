@@ -1,4 +1,4 @@
-# Task 4: Consult registered orders
+    # Task 4: Consult registered orders
 # Rule: No lists allowed. Using Dictionary and Tuples only.
 
 def get_all_orders(orders_dict):
