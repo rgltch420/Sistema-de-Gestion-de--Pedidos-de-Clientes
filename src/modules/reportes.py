@@ -12,14 +12,12 @@ def calcular_total_ingresos(pedidos):
 def agrupar_por_cliente(pedidos):
     agrupado = {}
 
-    for pedido in pedidos.values():
+    for id_pedido, pedido in pedidos.items():
         cliente = pedido["client"]
 
         if cliente not in agrupado:
             agrupado[cliente] = {}
 
-        # guardamos pedidos por cliente
-        id_pedido = pedido.get("id", len(agrupado[cliente]) + 1)
         agrupado[cliente][id_pedido] = pedido
 
     return agrupado
