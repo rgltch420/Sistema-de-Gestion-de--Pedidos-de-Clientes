@@ -1,99 +1,112 @@
 # Order Management System
 
-A console-based Order Management System developed in Python.  
-This program allows users to register clients, register products, create orders, and generate reports.
+A console-based **Order Management System** developed in Python.  
+This application allows users to manage clients, products, orders, and reports in a simple and structured way.
 
 ---
 
 ## Features
 
-- Register clients with name and email validation  
-- Register products using tuples (ID, name, price)  
-- Create orders linking clients and products  
-- Generate reports including:
-  - Total orders
-  - Total income
-  - Orders grouped by client
-  - Products sold  
+- Client registration with name and email validation  
+- Product registration using tuples (`ID`, `name`, `price`)  
+- Order creation linking clients and products  
+- Report generation including:
+  - Total number of orders  
+  - Total income  
+  - Orders grouped by client  
+  - Sold products summary  
 
 ---
 
 ## Project Structure
--src/
--│── main.py
--│── modules/
--│ ├── clientes.py
--│ ├── productos.py
--│ ├── pedidos.py
--│ ├── reportes.py
 
+```bash
+src/
+│
+├── main.py
+└── modules/
+    ├── clientes.py
+    ├── productos.py
+    ├── pedidos.py
+    └── reportes.py
+````
 
+---
 
 ## How to Run
 
-1. Navigate to the project folder:
+1. Navigate to the project directory:
 
- -src
+```bash
+cd src
+```
 
-2. Run the program 
+2. Run the program:
 
-- python main.py
+```bash
+python main.py
+```
+
+---
 
 ## Supported Operating Systems
 
 This program is compatible with:
 
--Linux (tested on Arch Linux)
+* Linux (tested on Arch Linux)
+* Windows
+* macOS
 
--Windows
-
--macOS
+---
 
 ## OS-Specific Behavior
 
-The program uses a function to clear the console screen:
+The application clears the console screen using:
 
--os.system("cls" if os.name == "nt" else "clear")
+```python
+os.system("cls" if os.name == "nt" else "clear")
+```
 
--On Linux / macOS
+### Behavior by OS
 
-Uses the clear command
+* **Linux / macOS:** uses the `clear` command
+* **Windows:** uses the `cls` command
 
--On Windows
+---
 
-Uses the cls command
-
-## If Issues Occur
+## Troubleshooting
 
 If the screen does not clear correctly:
 
-- Option 1: Check terminal support
+### Option 1: Verify terminal support
 
-Linux/macOS → ensure clear works in your terminal
+* Linux/macOS: ensure the `clear` command works in your terminal
+* Windows: use CMD or PowerShell
 
-Windows → use CMD or PowerShell
+### Option 2: Disable screen clearing
 
-- Option 2: Disable screen clearing
+You can comment out the clear function in the code:
 
-You can comment out the clear function:
-- #clear()
+```python
+# clear()
+```
+
+---
 
 ## Notes
 
-- The program uses dictionaries for data storage
+* The program uses dictionaries for data storage
+* Products are stored as tuples
+* Lists are not used (as required by the assignment)
+* Input validation is implemented to prevent errors
 
-- Products are stored as tuples
-
-- No lists are used (as required by the assignment)
-
-- Input validation is implemented to prevent errors
+---
 
 ## Example Workflow
 
 1. Register clients
-
 2. Register products
-
 3. Create orders
+4. View reports
 
-4. View report
+```
